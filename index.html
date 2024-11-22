@@ -10,26 +10,22 @@
 
 <script type="text/babel">
     const root = document.getElementById("root");
-    let counter = 0;
 
-    function countUP() {
-        counter += 1;
-        render();
+    function App() {
+        const [counter, serCounter] = React.useState(0);
+        const onClick = () => {
+            // counter += 1;
+            // console.log(counter);
+            serCounter(counter + 1);
+        }
+        return (
+            <div>
+                <h3>Total clicks: {counter}</h3>
+                <button onClick={onClick}>Click me</button>
+            </div>
+        );
     }
 
-    function render() {
-        ReactDOM.render(<Container/>, root);
-    }
-
-    const Container = () => (
-        <div>
-            <h3>Total clicks: {counter}</h3>
-            <button onClick={countUP}>Click me</button>
-        </div>
-    );
-    // const container = React.createElement("div", null, [Title, Button]);
-
-    render();
-    // ReactDOM.render(<Container/>, root);
+    ReactDOM.render(<App/>, root);
 </script>
 </html>
