@@ -7,33 +7,34 @@
 <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script src="https://unpkg.com/prop-types/prop-types.min.js"></script>
 
 <script type="text/babel">
     const root = document.getElementById("root");
-    function Btn({text, changeValue}) {
-        console.log(text, "was render");
+    function Btn({text, fontSize = 12}) {
         return (
             <button
-                onClick={changeValue}
                 style={{
                 backgroundColor : "tomato",
                 color : "white",
                 padding : "10px 20px",
                 border : 0,
-                borderRadius : 10
+                borderRadius : 10,
+                fontSize
             }}>{text}</button>
         )
     }
 
-    const MemorizedBth = React.memo(Btn)
+    Btn.propTypes = {
+        text : PropTypes.string.isRequired,
+        fontSize : PropTypes.number,
+    }
 
     function App() {
-        const [value, setValue] = React.useState("Save Changes")
-        const changeValue = () => setValue("Revert Changes")
         return (
             <div>
-                <MemorizedBth text={value} changeValue={changeValue} />
-                <MemorizedBth text="Continue" />
+                <Btn text="Save Changes" fontSize={18} />
+                <Btn text={"Continue"} />
             </div>
         );
     }
